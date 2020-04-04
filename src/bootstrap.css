@@ -25,7 +25,7 @@
   min-width: 20%;
   max-width: 20%;
   background-color: var(--primaryRed);
-  box-shadow: 5px 10px 50px black;
+  box-shadow: 0 0 30px -5px black;
 }
 
 .recipe-nav .nav-link {
@@ -45,7 +45,7 @@
 :root {
   /* Custom */
   --primaryRed: rgb(206, 23, 60);
-  --darkRed: rgb(117, 14, 35);
+  --darkRed: rgb(153, 18, 45);
   --lightRed: ##e75f7a;
   --silver: #c0c0c0;
 

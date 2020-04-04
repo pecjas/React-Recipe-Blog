@@ -11,8 +11,9 @@ import Contact from './components/Contact';
 function app() {
   return (
     <React.Fragment>
-      <div className="d-flex">
-        <Sidebar />
+    <div className="d-flex">
+      <Sidebar />
+      <div className="container">
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/search" component={Search} />
@@ -20,7 +21,8 @@ function app() {
           <Route path="/login" component={Login} />
           <Route path="/contact" component={Contact} />
         </Switch>
-        </div>
+      </div>
+    </div>
     </React.Fragment>
   );
 }

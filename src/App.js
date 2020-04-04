@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './bootstrap.css';
+import {Switch,Route} from 'react-router-dom';
+import Home from './components/Home';
+import Search from './components/Search';
+import Sidebar from './components/Sidebar';
+import Manage from './components/Manage';
+import Login from './components/Login';
+import Contact from './components/Contact';
 
-function App() {
+function app() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <div className="d-flex">
+        <Sidebar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/search" component={Search} />
+          <Route path="/manage" component={Manage} />
+          <Route path="/login" component={Login} />
+          <Route path="/contact" component={Contact} />
+        </Switch>
+        </div>
+    </React.Fragment>
   );
 }
 
-export default App;
+export default app;

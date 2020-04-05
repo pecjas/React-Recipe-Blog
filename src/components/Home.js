@@ -5,7 +5,7 @@ export default class Home extends Component {
   render() {
     return(
       <React.Fragment>
-      <h1 className="mx-auto">Recipe Blog - Home Page</h1>
+      <h1 className="mx-auto text-center">Recipe Blog - Home Page</h1>
       <br />
       <RecipeCarousel />
       <br />

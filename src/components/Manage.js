@@ -3,7 +3,7 @@ import '../bootstrap.css';
 
 function Search() {
   return (
-    <h1>Manage Page</h1>
+    <h1 className="text-center">Manage Page</h1>
   );
 }
 

@@ -8,7 +8,7 @@ export default function Input(props) {
 }
 
 export function TextArea(props) {
-    const element = <textarea class="form-control" id={props.id} rows={props.height} placeholder={props.placeholder} />
+    const element = <textarea className="form-control" id={props.id} rows={props.height} placeholder={props.placeholder} />
     return(
         FormGroup(props, element)
     )
@@ -16,8 +16,8 @@ export function TextArea(props) {
 
 function FormGroup(props, element) {
     return (
-        <div class="form-group">
-            <label for={props.id}>{props.label}</label>
+        <div className="form-group">
+            <label htmlFor={props.id}>{props.label}</label>
             {element}
         </div>
     )

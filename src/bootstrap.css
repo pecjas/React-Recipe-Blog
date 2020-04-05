@@ -8,7 +8,9 @@
 
 /* Custom */
 
-
+.card-shadow {
+  box-shadow: 0 0 25px -15px black;
+}
 
 .recipe-carousel-item {
   width: 100%;

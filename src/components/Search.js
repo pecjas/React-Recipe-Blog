@@ -1,9 +1,14 @@
 import React from 'react';
-import '../bootstrap.css';
+import SearchBar from './forms/SearchBar';
+import AllRecipes from './AllRecipes';
 
 function Search() {
   return (
-    <h1>Search Page</h1>
+    <React.Fragment>
+      <h1 className="text-center">Find a Recipe</h1>
+      <SearchBar id="searchBar" />
+      <AllRecipes />
+    </React.Fragment>
   );
 }
 

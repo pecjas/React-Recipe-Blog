@@ -4,12 +4,15 @@ import './bootstrap.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router} from 'react-router-dom';
+import {RecipeProvider} from './context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <RecipeProvider>
+      <Router>
+        <App />
+      </Router>
+    </RecipeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

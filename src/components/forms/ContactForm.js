@@ -10,10 +10,10 @@ export default class ContactForm extends Component {
     return (
       <React.Fragment>
       <form method="post">
-        <Name id="contactName" />
+        <Name id="contactName" placeholder="Your Name"/>
         <Email id="contactEmail" />
         <Subject id="contactSubject" />
-        <Message id="contactMessage" height="5"/>
+        <Message id="contactMessage" rows="5"/>
         <Button type="submit" placement="bottom" title="Send email" content="Send" />
       </form>
       </React.Fragment>

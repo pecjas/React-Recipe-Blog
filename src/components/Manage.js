@@ -10,13 +10,20 @@ export default class Manage extends React.Component {
     super(props);
 
     this.state = {
-      //Set state
+      recipeDetails = []
     }
   }
 
   componentDidMount() {
-    console.log(this.context);
-    
+    this.getRecipeData()
+  }
+
+  getRecipeData() {
+    let ref = Firebase.database().ref("/");
+    ref.on("value", snapshot => {
+      const state = snapshot.val();
+      this.setState(state);
+    })
   }
 
   render() {

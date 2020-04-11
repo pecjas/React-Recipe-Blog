@@ -1,5 +1,6 @@
 import React from 'react';
 import './bootstrap.css';
+import Firebase from 'firebase';
 import {Switch,Route} from 'react-router-dom';
 import Home from './components/Home';
 import Recipes from './components/Recipes';
@@ -11,6 +12,7 @@ import Contact from './components/Contact';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
         default: "Default App string"
     }

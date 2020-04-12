@@ -10,7 +10,7 @@ export default class ContactForm extends Component {
     return (
       <React.Fragment>
       <form method="post">
-        <Name id="contactName" placeholder="Your Name"/>
+        <Name id="contactName" placeholder="Your Name" ref="" />
         <Email id="contactEmail" />
         <Subject id="contactSubject" />
         <Message id="contactMessage" rows="5"/>

@@ -1,16 +1,38 @@
 import React from 'react';
 import { RadioOption } from './Input';
 
-export default function RecipeVerdict(props) {
-    return (
-        <React.Fragment>
-        <label htmlFor={props.id}>{props.label}</label>
-        <select class="custom-select" id={props.id}>
-            <option value="0" >What's the verdict?</option>
-            <option value="1" >Good</option>
-            <option value="2" >Okay</option>
-            <option value="3" >Bad</option>
-        </select>
-        </React.Fragment>
-    );
+export const Verdicts = {
+    UNDECIDED: "What's the verdict?",
+    GOOD: "Good",
+    OKAY: "Okay",
+    BAD: "Bad"
+}
+
+export default class RecipeVerdict extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        var options = []
+        const verdicts = Object.keys(Verdicts)
+
+        var value;
+        for (var i = 0; i < verdicts.length; i++) {
+            value = verdicts[i]
+
+            options.push(
+                <option key={i} value={value} >{Verdicts[value]}</option>
+            )
+        }
+
+        return (
+            <React.Fragment>
+            <label htmlFor={this.props.id}>{this.props.label}</label>
+            <select className="custom-select" id={this.props.id} onChange={this.props.onChange} >
+                {options}
+            </select>
+            </React.Fragment>
+        );
+    }
 }

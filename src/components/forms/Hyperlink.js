@@ -1,8 +1,14 @@
 import React from 'react';
 import Input from './Input';
 
-export default function Hyperlink(props) {
-    return (
-        <Input id={props.id} label="Link" type="url" placeholder={props.placeholder} />
-    );
+export default class Hyperlink extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Input id={this.props.id} label="Link" type="url" placeholder={this.props.placeholder} onChange={this.props.onChange} />
+        );
+    }
 }

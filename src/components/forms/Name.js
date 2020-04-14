@@ -9,7 +9,8 @@ export default class Name extends React.Component {
 
     render() {
         return (
-            <Input id={this.props.id} label="Name" type="text" placeholder={this.props.placeholder} onChange={this.props.onChange} />
+            <Input id={this.props.id} label="Name" type="text" placeholder={this.props.placeholder}
+                onChange={this.props.onChange} value={this.props.value} />
         );
     }
 }

@@ -9,7 +9,7 @@ export default class Comments extends React.Component {
     render() {
         return (
             <TextArea id={this.props.id} rows={this.props.rows} label="Comments" placeholder="Your comments here"
-                onChange={this.props.onChange} />
+                onChange={this.props.onChange} value={this.props.value} />
         );
     }
 }

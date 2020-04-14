@@ -16,20 +16,20 @@ export default class RecipeVerdict extends React.Component {
     render() {
         var options = []
         const verdicts = Object.keys(Verdicts)
-
+        
         var value;
         for (var i = 0; i < verdicts.length; i++) {
             value = verdicts[i]
 
             options.push(
-                <option key={i} value={value} >{Verdicts[value]}</option>
+                <option key={i} value={String(value)} >{Verdicts[value]}</option>
             )
         }
 
         return (
             <React.Fragment>
             <label htmlFor={this.props.id}>{this.props.label}</label>
-            <select className="custom-select" id={this.props.id} onChange={this.props.onChange} >
+            <select className="custom-select" id={this.props.id} onChange={this.props.onChange} value={this.props.selected} >
                 {options}
             </select>
             </React.Fragment>

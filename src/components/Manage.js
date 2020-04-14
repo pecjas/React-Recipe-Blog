@@ -22,38 +22,53 @@ export default class Manage extends React.Component {
 
     this.state = {
       recipeID: urlParams.get('recipe_id'),
-      imagePreviewURL: "",
+      imagePreviewSrc: "",
       image: "",
-      recipeDetails: {}
+      recipeDetails: {},
+      originalRecipeDetails: {},
+      originalImagePreviewSrc: ""
     }
   }
 
   componentDidMount() {
     this.getRecipeData();
-    this.getRecipeImage();
   }
 
   getRecipeData() {
     let ref = Firebase.database().ref("/recipes/".concat(this.state["recipeID"]));
     ref.on("value", snapshot => {
       const state = snapshot.val();
-      this.setState({recipeDetails: state});
+
+      this.setState({recipeDetails: state}, () => {
+        this.getRecipeImage();
+      });
+      this.setState({originalRecipeDetails: state});
     })
   }
 
   getRecipeImage() {
-    let imageRef = this.firebaseStorageRef.child("/recipe_images/".concat(this.state["recipeID"]));
-    let manageComponent = this;
+    if (this.shouldGetRecipeImage()) {
+      let imageRef = this.firebaseStorageRef.child("/recipe_images/".concat(this.state["recipeID"]));
+      let manageComponent = this;
 
-    imageRef.getDownloadURL().then(function(url) {
-      manageComponent.setState({imagePreviewURL: url})
-      });
+      imageRef.getDownloadURL().then(function(url) {
+        manageComponent.setState({imagePreviewSrc: url})
+        manageComponent.setState({originalImagePreviewSrc: url});       
+        }).catch(function(error) {
+          console.log("Caught error");
+          
+        })
     }
+    }
+
+  shouldGetRecipeImage() {
+    return (this.state.recipeDetails.imageStored && this.state.imagePreviewSrc == "")
+  }
 
   handleNameChange = (event) => {
     this.setState({recipeDetails: {
       ...this.state.recipeDetails,
-      title: event.target.value}});
+      name: event.target.value}});
   }
 
   handleVerdictChange = (event) => {
@@ -74,13 +89,12 @@ export default class Manage extends React.Component {
       comment: event.target.value}});
   }
 
-  handleImageChange = (event) => {
+  handleImageChange = (event) => {    
     let reader = new FileReader();
     let image = event.target.files[0];
 
     reader.onloadend = () => {
-      this.setState({imagePreviewURL: reader.result})
-      console.log(reader.result); 
+      this.setState({imagePreviewSrc: reader.result})
     }
 
     if (image) {
@@ -90,24 +104,33 @@ export default class Manage extends React.Component {
     this.setState({image: image})
   }
 
-  handleSubmit = event => {
-    console.log(this);
+  handleSubmit = (event) => {
     event.preventDefault();
-
-    this.writeRecipeData();
-    this.storeRecipeImage();
+    try {
+      this.storeRecipeImage();
+      this.writeRecipeData(true);
+    }
+    catch(error) {
+      this.writeRecipeData(false);
+    }
+    return false;
   };
 
-  writeRecipeData = () => {
+  writeRecipeData = (isImageStored) => {
+    var recipeDetails = {
+      ...this.state.recipeDetails,
+      imageStored: isImageStored
+    }
+
     Firebase.database()
       .ref("/recipes/".concat(this.state["recipeID"]))
-      .set(this.state.recipeDetails);
-    console.log("DATA SAVED");
+      .set(recipeDetails);
+    
+    this.setState(recipeDetails)
   };
 
   storeRecipeImage = () => {
     const path = "/recipe_images/".concat(this.state.recipeID)
-    console.log(path);
     
     var storageRef = this.firebaseStorageRef.child(path)
     storageRef.put(this.state.image)
@@ -119,8 +142,9 @@ export default class Manage extends React.Component {
       <h1 className="text-center">Manage Recipe</h1>
       <ManageRecipeForm nameRef={this.name} onSubmit={this.handleSubmit} nameChange={this.handleNameChange}
         verdictChange={this.handleVerdictChange} linkChange={this.handleLinkChange} 
-        commentChange={this.handleCommentChange} imageChange={this.handleImageChange} />
-      <ImagePreview src={this.state.imagePreviewURL} />
+        commentChange={this.handleCommentChange} imageChange={this.handleImageChange}
+        currentValues={this.state.recipeDetails} />
+      <ImagePreview src={this.state.imagePreviewSrc} />
       </React.Fragment>
     );
   }

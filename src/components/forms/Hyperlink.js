@@ -8,7 +8,8 @@ export default class Hyperlink extends React.Component {
 
     render() {
         return (
-            <Input id={this.props.id} label="Link" type="url" placeholder={this.props.placeholder} onChange={this.props.onChange} />
+            <Input id={this.props.id} label="Link" type="url" placeholder={this.props.placeholder}
+                onChange={this.props.onChange} value={this.props.value} />
         );
     }
 }

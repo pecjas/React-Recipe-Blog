@@ -6,8 +6,10 @@ export default class Input extends React.Component {
     }
 
     render() {
-        const element = <input type={this.props.type} className="form-control" id={this.props.type}
-            placeholder={this.props.placeholder} onChange={this.props.onChange} />; 
+        const element =
+            <input type={this.props.type} className="form-control" id={this.props.type}
+                placeholder={this.props.placeholder} onChange={this.props.onChange} value={this.props.value || ''} />;
+
         return (
             FormGroup(this.props, element)
         );
@@ -23,7 +25,7 @@ export class TextArea extends React.Component {
         const element = 
             <React.Fragment>
             <textarea className="form-control" id={this.props.id} rows={this.props.rows}
-                placeholder={this.props.placeholder} onChange={this.props.onChange} />
+                placeholder={this.props.placeholder} onChange={this.props.onChange} value={this.props.value || ''} />
             </React.Fragment>
         return(
             FormGroup(this.props, element)
@@ -37,7 +39,7 @@ export function RadioOption(props) {
             <label class="form-check-label" htmlFor={props.id} >
                 {props.label}
             </label>
-            <input className="form-check-input" type="radio" name={props.name} id={props.id} value={props.value} />
+            <input className="form-check-input" type="radio" name={props.name} id={props.id} value={props.value || ''} />
         </div>
     )
 }
